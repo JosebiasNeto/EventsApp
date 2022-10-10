@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eventsapp.databinding.FragmentEventsBinding
-import com.example.eventsapp.domain.model.EventModel
 import com.example.eventsapp.presentation.SharedViewModel
 import com.example.eventsapp.utils.OnItemClickListener
 import com.example.eventsapp.utils.addOnItemClickListener
@@ -16,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class EventsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventsBinding
-    //private val viewModel: SharedViewModel by viewModel()
+    private val viewModel: SharedViewModel by viewModel()
     private lateinit var adapter: EventsAdapter
 
     override fun onCreateView(
@@ -25,13 +24,14 @@ class EventsFragment : Fragment() {
     ): View {
         binding = FragmentEventsBinding.inflate(layoutInflater)
 
-        setupList()
         setupObservers()
+        setupList()
 
         return binding.root
     }
 
     private fun setupList(){
+        viewModel.getAllEvents()
         adapter = EventsAdapter(arrayListOf())
         binding.eventList.layoutManager = LinearLayoutManager(context)
         binding.eventList.adapter = adapter
@@ -43,9 +43,8 @@ class EventsFragment : Fragment() {
     }
 
     private fun setupObservers(){
-//        viewModel.getAllEvents()
-//        viewModel.eventsList.observe(viewLifecycleOwner) {
-//            adapter.refreshEventsList(it)
-//        }
+        viewModel.eventsList.observe(viewLifecycleOwner) {
+            adapter.refreshEventsList(it)
+        }
     }
 }

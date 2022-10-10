@@ -1,12 +1,13 @@
-package com.example.eventsapp.domain
+package com.example.eventsapp.domain.repository
 
 import com.example.eventsapp.data.ApiService
 import com.example.eventsapp.domain.model.EventModel
 import com.example.eventsapp.domain.model.UserModel
 
-class EventRepository(private val apiService: ApiService) {
+class EventRepositoryImpl(private val apiService: ApiService):
+    EventRepository {
 
-    suspend fun getAllEvents(): List<EventModel> {
+    override suspend fun getAllEvents(): List<EventModel> {
         return try {
             apiService.getAllEvents()
         } catch (e: Exception){
@@ -15,7 +16,7 @@ class EventRepository(private val apiService: ApiService) {
         }
     }
 
-    suspend fun makeCheckIn(userModel: UserModel){
+    override suspend fun makeCheckIn(userModel: UserModel){
         try {
             apiService.makeCheckIn(userModel)
         } catch (e: Exception){
