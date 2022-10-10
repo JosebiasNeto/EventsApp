@@ -1,21 +1,21 @@
-package com.example.eventsapp.presentation
+package com.example.eventsapp.presentation.details
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.eventsapp.databinding.FragmentEventsBinding
+import com.example.eventsapp.databinding.FragmentDetailsBinding
 
-class EventsFragment : Fragment() {
+class DetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentEventsBinding
+    private lateinit var binding: FragmentDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEventsBinding.inflate(layoutInflater)
+        binding = FragmentDetailsBinding.inflate(layoutInflater)
 
 
 

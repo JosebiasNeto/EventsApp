@@ -1,4 +1,4 @@
-package com.example.eventsapp.domain
+package com.example.eventsapp.domain.model
 
 import com.google.gson.annotations.SerializedName
 

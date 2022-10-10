@@ -1,4 +1,4 @@
-package com.example.eventsapp.domain
+package com.example.eventsapp.domain.model
 
 class EventModel (
     val date: Int,
