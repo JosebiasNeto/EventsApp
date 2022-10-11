@@ -8,14 +8,17 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.eventsapp.databinding.FragmentDetailsBinding
+import com.example.eventsapp.presentation.SharedViewModel
 import com.example.eventsapp.utils.StringUtils.getDateTime
 import com.example.eventsapp.utils.StringUtils.getPrice
 import com.squareup.picasso.Picasso
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailsBinding
     private val args: DetailsFragmentArgs by navArgs()
+    private val viewModel: SharedViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,5 +40,13 @@ class DetailsFragment : Fragment() {
         binding.backButton.setOnClickListener {
             requireView().findNavController().popBackStack()
         }
+        binding.checkinButton.setOnClickListener {
+            showConfirmDialog()
+        }
+    }
+
+    private fun showConfirmDialog(){
+        requireView().findNavController().navigate(DetailsFragmentDirections
+            .actionDetailsFragmentToDialog())
     }
 }

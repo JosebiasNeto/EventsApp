@@ -21,6 +21,14 @@
             android:name="event"
             app:argType="com.example.eventsapp.domain.model.EventModel"
             />
+        <action
+            android:id="@+id/action_detailsFragment_to_dialog"
+            app:destination="@+id/dialog"/>
     </fragment>
+
+    <dialog
+        android:id="@+id/dialog"
+        android:name="com.example.eventsapp.presentation.details.ConfimCheckInDialog"
+        android:label="ConfirmDialog"/>
 
 </navigation>
