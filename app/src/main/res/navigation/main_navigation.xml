@@ -7,13 +7,20 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.example.eventsapp.presentation.events.EventsFragment"
-        android:label="Events"
-        />
+        android:label="Events">
+        <action
+            android:id="@+id/action_eventsFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.eventsapp.presentation.details.DetailsFragment"
-        android:label="Details"
-        />
+        android:label="Details">
+        <argument
+            android:name="event"
+            app:argType="com.example.eventsapp.domain.model.EventModel"
+            />
+    </fragment>
 
 </navigation>

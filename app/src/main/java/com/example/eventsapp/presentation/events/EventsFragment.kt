@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eventsapp.databinding.FragmentEventsBinding
 import com.example.eventsapp.presentation.SharedViewModel
@@ -37,7 +38,10 @@ class EventsFragment : Fragment() {
         binding.eventList.adapter = adapter
         binding.eventList.addOnItemClickListener(object : OnItemClickListener{
             override fun onItemClicked(position: Int, view: View) {
-
+                requireView().findNavController().navigate(EventsFragmentDirections.
+                actionEventsFragmentToDetailsFragment(
+                    viewModel.eventsList.value!![position]
+                ))
             }
         })
     }

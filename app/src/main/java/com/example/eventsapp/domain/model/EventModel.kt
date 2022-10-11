@@ -1,10 +1,12 @@
 package com.example.eventsapp.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 class EventModel (
-    val date: Long,
-    val description: String,
-    val image: String,
-    val price: Float,
-    val title: String,
-    val id: Int
-        )
+    @SerializedName("date") val date: Long,
+    @SerializedName("description") val description: String,
+    @SerializedName("image") val image: String,
+    @SerializedName("price") val price: Float,
+    @SerializedName("title") val title: String,
+    @SerializedName("id") val id: Int
+        ): java.io.Serializable
