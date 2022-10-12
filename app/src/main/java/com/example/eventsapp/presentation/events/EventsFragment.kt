@@ -11,6 +11,7 @@ import com.example.eventsapp.databinding.FragmentEventsBinding
 import com.example.eventsapp.presentation.SharedViewModel
 import com.example.eventsapp.utils.OnItemClickListener
 import com.example.eventsapp.utils.addOnItemClickListener
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EventsFragment : Fragment() {

@@ -29,6 +29,10 @@
     <dialog
         android:id="@+id/dialog"
         android:name="com.example.eventsapp.presentation.details.ConfimCheckInDialog"
-        android:label="ConfirmDialog"/>
+        android:label="ConfirmDialog">
+        <argument
+            android:name="event_id"
+            app:argType="integer"/>
+    </dialog>
 
 </navigation>

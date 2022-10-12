@@ -5,5 +5,5 @@ import com.example.eventsapp.domain.model.UserModel
 
 interface EventRepository {
     suspend fun getAllEvents(): List<EventModel>
-    suspend fun makeCheckIn(userModel: UserModel)
+    suspend fun makeCheckIn(userModel: UserModel): Boolean
 }

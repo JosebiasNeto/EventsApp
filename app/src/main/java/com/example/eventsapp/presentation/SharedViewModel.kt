@@ -3,8 +3,7 @@ package com.example.eventsapp.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eventsapp.domain.model.EventModel
-import com.example.eventsapp.domain.model.UserModel
+import com.example.eventsapp.domain.model.*
 import com.example.eventsapp.domain.repository.EventRepository
 import kotlinx.coroutines.launch
 
@@ -13,6 +12,7 @@ class SharedViewModel(
 ): ViewModel() {
 
     val eventsList = MutableLiveData<List<EventModel>>()
+    val result = MutableLiveData<StateResult>(StateAwait)
 
     fun getAllEvents(){
         viewModelScope.launch {
@@ -21,9 +21,18 @@ class SharedViewModel(
     }
 
     fun makeCheckIn(userModel: UserModel){
+        result.value = StateLoading
         viewModelScope.launch {
-            repository.makeCheckIn(userModel)
+            if(repository.makeCheckIn(userModel)){
+                result.value = StateSuccess
+            } else {
+                result.value = StateError
+            }
         }
+    }
+
+    fun resetResult(){
+        result.value = StateAwait
     }
 
 }

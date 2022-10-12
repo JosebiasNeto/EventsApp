@@ -7,11 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.navArgs
 import com.example.eventsapp.databinding.ConfirmCheckinDialogBinding
+import com.example.eventsapp.domain.model.UserModel
+import com.example.eventsapp.presentation.SharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ConfimCheckInDialog: DialogFragment() {
 
     private lateinit var binding: ConfirmCheckinDialogBinding
+    private val viewModel: SharedViewModel by sharedViewModel()
+    private val args: ConfimCheckInDialogArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,13 +37,22 @@ class ConfimCheckInDialog: DialogFragment() {
             if(invalidNameAndEmail()){
                 Toast.makeText(context, "Preencha corretamente", Toast.LENGTH_SHORT).show()
             } else {
-
+                confirmCheckIn()
+                dismiss()
             }
         }
     }
 
     private fun invalidNameAndEmail(): Boolean{
         return binding.name.text.isEmpty() || binding.email.text.isEmpty()
+    }
+
+    private fun confirmCheckIn(){
+        viewModel.makeCheckIn(UserModel(
+            args.eventId,
+            binding.name.text.toString(),
+            binding.email.text.toString()
+        ))
     }
 
     override fun onResume() {

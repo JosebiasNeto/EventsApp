@@ -16,11 +16,13 @@ class EventRepositoryImpl(private val apiService: ApiService):
         }
     }
 
-    override suspend fun makeCheckIn(userModel: UserModel){
-        try {
+    override suspend fun makeCheckIn(userModel: UserModel): Boolean{
+        return try {
             apiService.makeCheckIn(userModel)
+            true
         } catch (e: Exception){
             print(e.toString())
+            false
         }
     }
 }
