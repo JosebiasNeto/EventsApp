@@ -1,14 +1,19 @@
 package com.example.eventsapp.presentation
 
+import android.content.Intent
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eventsapp.domain.model.*
 import com.example.eventsapp.domain.repository.EventRepository
+import com.example.eventsapp.services.ShareScreenService
 import kotlinx.coroutines.launch
 
 class SharedViewModel(
-    private val repository: EventRepository
+    private val repository: EventRepository,
+    private val shareService: ShareScreenService
 ): ViewModel() {
 
     val eventsList = MutableLiveData<List<EventModel>>()
@@ -35,4 +40,7 @@ class SharedViewModel(
         result.value = StateAwait
     }
 
+    fun shareEvent(view: View): Intent? {
+        return shareService.shareEvent(view)
+    }
 }

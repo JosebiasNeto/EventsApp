@@ -1,5 +1,6 @@
 package com.example.eventsapp.presentation.details
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.example.eventsapp.domain.model.StateError
 import com.example.eventsapp.domain.model.StateLoading
 import com.example.eventsapp.domain.model.StateSuccess
 import com.example.eventsapp.presentation.SharedViewModel
+import com.example.eventsapp.utils.Permission
 import com.example.eventsapp.utils.StringUtils.getDateTime
 import com.example.eventsapp.utils.StringUtils.getPrice
 import com.squareup.picasso.Picasso
@@ -25,6 +27,11 @@ class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private val args: DetailsFragmentArgs by navArgs()
     private val viewModel: SharedViewModel by sharedViewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Permission.requestPermission(requireContext(), this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,11 +82,19 @@ class DetailsFragment : Fragment() {
         binding.checkinButton.setOnClickListener {
             showConfirmDialog()
         }
+        binding.shareButton.setOnClickListener {
+            shareEvent()
+        }
     }
 
     private fun showConfirmDialog(){
         requireView().findNavController().navigate(DetailsFragmentDirections
             .actionDetailsFragmentToDialog(args.event.id))
+    }
+
+    private fun shareEvent(){
+        startActivity(Intent.createChooser(
+            viewModel.shareEvent(binding.eventLayout), "Compartilhar Evento"))
     }
 
     override fun onStop() {
