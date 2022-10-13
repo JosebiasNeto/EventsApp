@@ -1,0 +1,8 @@
+ARQUITETURA:
+Buscando melhor desacoplamento, toda regra de negocio foi controlada e testada nos viewmodels.
+Deixando os fragments unicamente responsaveis pelas views e repository e services responsaveis pelas interacoes externas.
+
+BIBLIOTECAS:
+Para suporte a API 19, nao foi utilizado o Jetpack Compose. Foi construido um app no modelo Single Activity,
+onde eh criada apenas uma activity e a navegacao eh feita pelo Navigation Component (recomendado pelo Android).
+Para controle de estado utlizamos LiveData e para a construcao dos testes utilizamos o MockK do Kotlin.
